@@ -1,6 +1,6 @@
 <?php
 
-    include "connect.php";
+    include "connectt.php";
     //1. tạo biến tự đặt
         $bientutao= "CREATE DATABASE IF NOT EXISTS cosodulieu";   // bước tạo database, CREATE DATABASE IF NOT EXISTS có nghĩa là: "Hãy tạo database tên là cosodulieu nếu nó chưa tồn tại; còn nếu nó đã có sẵn rồi thì bỏ qua và chạy tiếp code bên dưới
 
