@@ -21,13 +21,31 @@
             lever INT(6)
         )"; //UNSIGNED AUTO_INCREMENT tăng tự động id lên theo
 
-    // thực thi truy vấn xem đã tạo bảng thành công hay chưa
+        // thực thi truy vấn xem đã tạo bảng thành công hay chưa
 
         if($ketnoi -> query($taobang)== TRUE){   // gọi biến $ketnoi để kết nối với database,  còn query($taobang) để tạo ra cái bảng
             echo " Tạo bảng thành công <br>";
         }else {
             echo " Tạo bảng thất bại <br>";    // đến  bước này phải xem bên file connect.php đã để hiện database = " cosodulieu" hay chưa
         }
+
+            // tạo thêm 1 bảng sản phẩm
+        $bangsanpham = " CREATE TABLE IF NOT EXISTS sanpham(
+            id INT (6)UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+            name VARCHAR (50) NOT NULL,
+            image VARCHAR (150) NOT NULL,
+            price INT (10)
+
+        )";
+
+        if($ketnoi -> query($bangsanpham)==TRUE){
+            echo " tạo bảng thành công";
+        }else {
+            echo " tạo bảng thất bại";
+        }
+    
+
+    
 
     // 4. thêm dữ liệu vào bảng
         // $id =""; 
@@ -138,7 +156,7 @@
         while( $inhtml = mysqLi_fetch_array($kq_chenhtml)){
            
              echo $inhtml['taikhoan']."<br>";
-             
+
         }
 
 
