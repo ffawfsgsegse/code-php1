@@ -30,7 +30,7 @@
         }
 
     // 4. thêm dữ liệu vào bảng
-        // $id =""; 
+        // $id ="";
         // $taikhoan ="admin";
         // $matkhau ="123";
         // $lever = 1; // không cho vào "" thì sẽ thành dạng chuỗi
@@ -129,22 +129,6 @@
         $suadulieu = " UPDATE thanhvien SET id='$id' , taikhoan='$taikhoan' , matkhau='$matkhau' , lever='$lever'  WHERE id= 13 ";
 
         mysqLi_query($ketnoi, $suadulieu);
-
-    // 10. chèn html vào mysql
-
-        $chenhtml = "SELECT * FROM thanhvien";
-        $kq_chenhtml = mysqLi_query($ketnoi, $chenhtml);
-
-        while( $inhtml = mysqLi_fetch_array($kq_chenhtml)){
-           
-             echo $inhtml['taikhoan']."<br>";
-             
-        }
-
-
-
-
-
 
 
 ?>
