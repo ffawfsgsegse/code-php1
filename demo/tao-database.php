@@ -44,7 +44,8 @@
             echo " tạo bảng thất bại";
         }
     
-
+            //thêm dữ liệu vào bảng bangsanpham vừa tạo
+                
     
 
     // 4. thêm dữ liệu vào bảng
@@ -60,21 +61,21 @@
 
     // thực hiện truy vấn, cho câu lệnh thêm dữ liệu chạy
 
-        // mysqLi_query($ketnoi, $themdulieu); // mỗi lần f5 load lại trang thêm 1 lần trường dữ liệu
-        
-// 5.Chỉ thực hiện thêm dữ liệu KHI người dùng bấm nút có name="btn-submit" từ Form gửi lên
-// if (isset($_POST['btn-submit'])) {
-//     $taikhoan = $_POST['username'];
-//     $matkhau = $_POST['password'];
-//     $lever = 1;
+    // mysqLi_query($ketnoi, $themdulieu); // mỗi lần f5 load lại trang thêm 1 lần trường dữ liệu
 
-//     $themdulieu = "INSERT INTO thanhvien (taikhoan, matkhau, lever) 
-//                    VALUES ('$taikhoan', '$matkhau', '$lever')";
+    // 5.Chỉ thực hiện thêm dữ liệu KHI người dùng bấm nút có name="btn-submit" từ Form gửi lên
+    // if (isset($_POST['btn-submit'])) {
+    //     $taikhoan = $_POST['username'];
+    //    $matkhau = $_POST['password'];
+    //     $lever = 1;
 
-//     mysqli_query($ketnoi, $themdulieu);
-    
-//     echo "Thêm thành viên thành công!";
-// }
+    //     $themdulieu = "INSERT INTO thanhvien (taikhoan, matkhau, lever) 
+    //                    VALUES ('$taikhoan', '$matkhau', '$lever')";
+
+    //     mysqli_query($ketnoi, $themdulieu);
+
+    //     echo "Thêm thành viên thành công!";
+    // }
 
     //6. thêm dữ liệu, xem đã tồn tại chưa trước khi chèn
 
