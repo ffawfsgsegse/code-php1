@@ -11,11 +11,11 @@
     // check xem đã kết nối được hay chưa
         if($ketnoi){
             mysqLi_query($ketnoi, "SET NAMES 'utf8'");
-            echo " 
-                <script>
-                alert(` Đã kết nối thành  công `);
-                </script>            
-            ";
+            // echo " 
+            //     <script>
+            //     alert(` Đã kết nối thành  công `);
+            //     </script>            
+            // ";
         }else {
             echo "
                 <script>

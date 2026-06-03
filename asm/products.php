@@ -32,6 +32,33 @@
             transform: translateY(-2px);
         }
     </style>
+    <style>
+      /* Định dạng ô chứa nút chức năng để căn giữa */
+table td {
+    vertical-align: middle; /* Căn giữa nội dung theo chiều dọc */
+    text-align: center;     /* Căn giữa nội dung theo chiều ngang */
+}
+
+/* Định dạng nút xóa */
+.btn-delete {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e74c3c; /* Màu đỏ */
+    color: #ffffff !important;  /* Màu chữ trắng */
+    text-decoration: none;     /* Bỏ gạch chân */
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* Hiệu ứng khi di chuột vào nút xóa */
+.btn-delete:hover {
+    background-color: #c0392b; /* Đỏ đậm hơn */
+    box-shadow: 0 2px 5px rgba(231, 76, 60, 0.3);
+    transform: scale(1.05);    /* Phóng to nhẹ nút */
+}
+    </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom">
@@ -71,6 +98,7 @@
                       <th>----Giá----</th>
                       <th>----Ảnh----</th>
                       <th>----Danh Mục----</th>
+                      <th>----Chức Năng----</th>
                   </tr>
               </thead>
             <!-- dùng tbody để hiển thị dữ liệu -->
@@ -89,6 +117,13 @@
                       <td><?php echo  $them['gia'] ?></td>
                       <td> <img src="<?php echo  $them['anh'] ?>" width="100px"></td>
                       <td><?php echo  $them['danhmuc'] ?></td>
+                      <td>
+                        <a href="delete.php?xoa_id=<?php echo $them['id']; ?>" class="btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">Xóa </a>                       
+                      </td>
+                      <td>
+                        <a href="edit.php?edit_id=<?php echo $them['id']; ?>" class="btn-delete" onclick="return confirm('Bạn có muốn sửa không?');">Sửa </a>                       
+                      </td>
+                      
 
                     </tr>
                   <?php } ?>
