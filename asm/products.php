@@ -75,16 +75,49 @@ table td {
     <div class="container">
       <div class="row g-4">
         <aside class="col-lg-3">
-          <div class="table-panel p-3">
-            <h1 class="h5 fw-bold">Bộ lọc</h1>
-            <label class="form-label mt-3">Tìm kiếm</label>
-            <input class="form-control" id="productSearch" placeholder="Tên sản phẩm">
-            <label class="form-label mt-3">Danh mục</label>
-            <select class="form-select" id="categoryFilter"><option>Tất cả</option><option>Thời trang</option><option>Phụ kiện</option><option>Công nghệ</option><option>Gia dụng</option></select>
-            <label class="form-label mt-3">Giá tối đa: <span id="priceFilterValue">2.000.000d</span></label>
-            <input type="range" class="form-range" id="priceFilter" min="300000" max="2000000" step="50000" value="2000000">
-            <a class="btn btn-outline-secondary w-100 mt-2" href="wishlist.html">Sản phẩm yêu thích</a>
-          </div>
+
+          <!-- bắt đầu form chức năng tìm kiếm -->
+          <form method ="POST">
+            <div class="table-panel p-3">
+              <h1 class="h5 fw-bold">Bộ lọc</h1>
+              <label class="form-label mt-3">Tìm kiếm</label>
+              <input class="form-control" id="productSearch" name="noidung" placeholder="Tên sản phẩm">
+              <button type="submit" name="btn-timkiem"> Tìm Kiếm</button><br>
+              <label class="form-label mt-3">Danh mục</label> 
+              <select class="form-select" id="categoryFilter"><option>Tất cả</option><option>Thời trang</option><option>Phụ kiện</option><option>Công nghệ</option><option>Gia dụng</option></select>
+              <label class="form-label mt-3">Giá tối đa: <span id="priceFilterValue">2.000.000d</span></label>
+              <input type="range" class="form-range" id="priceFilter" min="300000" max="2000000" step="50000" value="2000000">
+              <a class="btn btn-outline-secondary w-100 mt-2" href="wishlist.html">Sản phẩm yêu thích</a>
+            </div>
+          </form>
+            <?php
+                include "connect.php";
+                    $noidung="";
+                  if(isset($_POST['btn-timkiem'])){
+                    // echo " Thành công";
+                    $noidung= $_POST['noidung']; // cái này là name của ô nhập 
+                    echo $noidung;
+                  }
+                    // tạo ra 1 biên tự tạo
+                  $timkiem = "SELECT * FROM sanpham WHERE ten LIKE '%$noidung%' ";
+                  $kq_timkiem = mysqLi_query($ketnoi, $timkiem);
+
+                  // lấy ra các dữ liệu
+
+                  while($search=mysqLi_fetch_array($kq_timkiem)){  //Là hàm có nhiệm vụ "bốc" ra một hàng dữ liệu từ tập hợp
+                      ?>
+                      <div class="product-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; width: 300px;">
+                        <h3 style="margin: 10px 0 5px 0; color: #333;"><?php echo $search['id']; ?></h3>        
+                        <img src="<?php echo $search['anh']; ?>" alt="Ảnh sản phẩm" style="max-width: 100%; height: auto; border-radius: 4px;">       
+                        <h3 style="margin: 10px 0 5px 0; color: #333;"><?php echo $search['ten']; ?></h3>       
+                        <p style="font-size: 14px; color: #777; margin-bottom: 5px;">Danh mục: <?php echo $search['danhmuc']; ?></p>       
+                        <p style="color: #fe3834; font-weight: bold;">Giá: <?php echo number_format($search['gia'], 0, ',', '.'); ?> VNĐ</p>
+        
+                       </div>
+                    <?php
+                  }
+                    ?>
+
         </aside>
         <section class="col-lg-9">
           <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
@@ -144,4 +177,4 @@ table td {
     <a href="add-product.php" class="btn-add-new">+ Thêm Sản Phẩm Mới</a>
 </div>
 </body>
-</html>s
+</html>

@@ -48,6 +48,13 @@
             ";
         }
 
+        $taobang = "CREATE TABLE IF NOT EXISTS thanhvien (
+            id INT (6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            taikhoan VARCHAR (30) NOT NULL,
+            matkhau VARCHAR (30) NOT NULL
+        )";
+
+        mysqLi_query($ketnoi, $taobang);
     // 3. thêm sản phẩm vào
         // thêm dữ liệu vào bảng, các biến này tự tạo ra
        
