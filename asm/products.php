@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="assets/css/styles.css" rel="stylesheet">
-  <style>
+<style>
         .action-bar {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -31,16 +31,15 @@
             background-color: #2980b9;
             transform: translateY(-2px);
         }
-    </style>
-    <style>
+    
       /* Định dạng ô chứa nút chức năng để căn giữa */
-table td {
+    table td {
     vertical-align: middle; /* Căn giữa nội dung theo chiều dọc */
     text-align: center;     /* Căn giữa nội dung theo chiều ngang */
-}
+  }
 
-/* Định dạng nút xóa */
-.btn-delete {
+  /* Định dạng nút xóa */
+  .btn-delete {
     display: inline-block;
     padding: 6px 12px;
     background-color: #e74c3c; /* Màu đỏ */
@@ -50,15 +49,54 @@ table td {
     font-weight: bold;
     border-radius: 4px;
     transition: all 0.2s ease;
-}
+  }
 
-/* Hiệu ứng khi di chuột vào nút xóa */
-.btn-delete:hover {
+  /* Hiệu ứng khi di chuột vào nút xóa */
+  .btn-delete:hover {
     background-color: #c0392b; /* Đỏ đậm hơn */
     box-shadow: 0 2px 5px rgba(231, 76, 60, 0.3);
     transform: scale(1.05);    /* Phóng to nhẹ nút */
-}
-    </style>
+  }
+  /* Thêm CSS cho nút mua hàng nhỏ gọn trong bảng */
+  .btn-buy {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #228be6; /* Màu xanh dương hiện đại */
+    text-decoration: none;
+    border-radius: 4px; /* Bo góc nhẹ giống nút Xóa/Sửa của bạn */
+    transition: all 0.2s ease;
+    margin-left: 5px; /* Tạo khoảng cách nhỏ với nút bên cạnh */
+  }
+
+  /* Hiệu ứng khi di chuột vào nút Mua */
+  .btn-buy:hover {
+    background-color: #1c7ed6;
+    box-shadow: 0 2px 8px rgba(34, 139, 230, 0.3);
+  }
+  /* Định dạng nút Chi Tiết Sản Phẩm màu vàng hiện đại */
+  .btn-detail {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff !important;   /* Chữ trắng nổi bật trên nền vàng */
+    background-color: #f1c40f;   /* Màu vàng Gold sáng */
+    text-decoration: none;       /* Bỏ gạch chân */
+    border-radius: 4px;          /* Bo góc đồng bộ với nút Mua/Xóa */
+    transition: all 0.2s ease;
+    margin-left: 5px;            /* Khoảng cách nhỏ với nút bên cạnh */
+  }
+
+  /* Hiệu ứng khi di chuột vào nút Chi Tiết */
+  .btn-detail:hover {
+    background-color: #f39c12;   /* Vàng đậm/Hổ phách khi hover */
+    box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4); /* Đổ bóng nhẹ */
+    transform: scale(1.03);      /* Phóng to nhẹ một chút */
+    }
+</style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom">
@@ -67,7 +105,7 @@ table td {
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li><li class="nav-item"><a class="nav-link active" href="products.html">Sản phẩm</a></li><li class="nav-item"><a class="nav-link" href="orders.html">Đơn hàng</a></li><li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li></ul>
-        <a class="btn btn-brand position-relative" href="cart.html"><i class="bi bi-bag me-2"></i>Giỏ hàng <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger" data-cart-count>0</span></a>
+        <a class="btn btn-brand position-relative" href="cart.php"><i class="bi bi-bag me-2"></i>Giỏ hàng <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger" data-cart-count>0</span></a>
       </div>
     </div>
   </nav>
@@ -156,8 +194,12 @@ table td {
                       <td>
                         <a href="edit.php?edit_id=<?php echo $them['id']; ?>" class="btn-delete" onclick="return confirm('Bạn có muốn sửa không?');">Sửa </a>                       
                       </td>
-                      
-
+                      <td>   
+                        <a href="cart.php?mua_id=<?php echo $them['id']; ?>" class="btn-buy">Mua</a>
+                      </td>
+                      <td>
+                        <a href="detail.php?detail_id=<?php echo $them['id']; ?>" style="text-decoration: none; color: #228be6; font-weight: bold;" class="btn-detail"> Chi Tiết Sản Phẩm    </a>                                        
+                      </td>
                     </tr>
                   <?php } ?>
               </tbody>

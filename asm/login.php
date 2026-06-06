@@ -1,7 +1,63 @@
 <?php
+    // liên kết với mysql
+        include "connect.php";
     
+         // tạo biến chữa lỗi
+            $error ="";
+            $error_tk = "";
+            $error_mk = "";
+    // kiểm tra nút đăng nhập
+        if(isset($_POST['btn-login'])){
+            // echo " ok";
+        // bắt đầu validate
+            $taikhoan = $_POST['username'];
+            $matkhau = $_POST['password'];
+
+        // validate không được để trống
+            if(empty($taikhoan)|| empty($matkhau)){
+                $error = " Tài khoản hoặc mật khẩu không được để trống";
+            }
+        // validate tài khoản
+            if(empty($taikhoan)){
+                $error_tk = " Tài khoản không được để trống";
+            }elseif(strlen($taikhoan) < 8){
+                $error_tk = " Tài khoản phải có độ dài lớn hơn 8 kí tự";
+            }
+        // validate mật khẩu
+            if(empty($matkhau)){
+                $error_mk = " Mật khẩu không được để trống";
+            }elseif(strlen($matkhau) < 8){
+                $error_mk = " Mật khẩu phải có độ dài hơn 8 Kí tự";
+            }
+
+        // validate - truy vấn tài khoản hoặc mật khẩu trùng khớp
+            if(empty($error_tk) && empty($error_mk)){
+        
+            // tạo biến check trùng
+                $trung_login = " SELECT * FROM thanhvien WHERE taikhoan='$taikhoan' AND matkhau='$matkhau' ";
+                $kq_trung_login= mysqLi_query($ketnoi, $trung_login);
+            // kết quả trả về từ database 
+
+            if(mysqLi_num_rows($kq_trung_login)){
+                // đăng nhập thành công
+                echo "
+                <script>
+                        alert('Đăng nhập thành công! Chào mừng " . $taikhoan . " đã quay trở lại.');
+                        window.location.href = 'products.php'; 
+                    </script>
+                    ";
+                    exit();  // Dừng các dòng script bên dưới lại
+            }else {
+                // đăng nhập thất bại
+                $error= "Tài khoản hoặc mật khẩu không chính xác! Vui lòng thử lại";
+            }
 
 
+
+
+        }
+
+        }
 
 
 ?>
@@ -101,6 +157,54 @@
         .footer-links a:hover {
             text-decoration: underline;
         }
+        /* Container bọc các nút điều hướng bên dưới form */
+        .navigation-box {
+             margin-top: 20px;
+             display: flex;
+            flex-direction: column;
+             align-items: center;
+             gap: 15px; /* Tạo khoảng cách đều giữa các dòng */
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ================= ĐỊNH DẠNG NÚT ĐĂNG KÝ MỚI ================= */
+        .btn-register-link {
+         display: inline-block;
+        width: 100%; /* Giúp nút kéo dài bằng nút Đăng Nhập phía trên */
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #228be6; /* Màu chữ xanh */
+        background-color: #e8f4fd; /* Nền xanh nhạt tạo sự phân cấp với nút Đăng Nhập */
+     text-align: center;
+     text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
+     border: 1px solid #74c0fc;
+     border-radius: 8px; /* Bo góc mềm mại giống các ô input */
+     box-sizing: border-box;
+     transition: all 0.2s ease-in-out;
+        }
+
+     /* Hiệu ứng khi di chuột vào nút Đăng Ký (Hover) */
+     .btn-register-link:hover {
+        background-color: #228be6;
+        color: #ffffff; /* Đổi màu nền và chữ ngược lại khi hover */
+        box-shadow: 0 4px 12px rgba(34, 139, 230, 0.2);
+        }
+
+        /* Dòng chữ phụ dưới cùng */
+        .text-sub {
+        font-size: 14px;
+        color: #868e96;
+        }
+
+        .text-sub a {
+        color: #228be6;
+        text-decoration: none;
+        font-weight: 600;
+        }
+        .text-sub a:hover {
+        text-decoration: underline;
+    }
     </style>
 </head>
 <body>
@@ -113,20 +217,36 @@
             <div class="input-group">
                 <label for="username">Tài khoản</label>
                 <input type="text" id="username" name="username" placeholder="Nhập tài khoản..." >
+                <?php                  
+                     echo "<h3 style='color: red; text-align: center; font-size: 15px; margin-bottom: 15px; font-weight: 600;'>" . $error_tk . "</h3>";                    
+                ?>
             </div>
 
             <div class="input-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" placeholder="Nhập mật khẩu..." >
+                <?php                  
+                     echo "<h3 style='color: red; text-align: center; font-size: 15px; margin-bottom: 15px; font-weight: 600;'>" . $error_mk . "</h3>";                    
+                ?>
             </div>
+            <?php 
+                 if (!empty($error)) {
+                     echo "<h3 style='color: red; text-align: center; font-size: 15px; margin-bottom: 15px; font-weight: 600;'>" . $error . "</h3>";
+                     } 
+             ?>
 
             <button type="submit" name="btn-login" class="btn-login">Đăng Nhập</button>
             
-             <button type="submit" name="btn-register" class="btn-register"> <a href = "register.php"> Đăng ký </a></button>
+            
+             <!-- <button type="submit" name="btn-register" class="btn-register"> <a href = "register.php"> Đăng ký </a></button> -->
         </form>
 
-        <div class="footer-links">
-            <p>Chưa có tài khoản? <a href="#">Đăng ký ngay</a></p>
+        <div class="navigation-box">
+            <!-- <a href="register.php" class="btn-register-link">Đăng Ký Tài Khoản Mới</a> -->
+            
+            <p class="text-sub">
+                Chưa có tài khoản? <a href="register.php">Đăng ký ngay</a>
+            </p>
         </div>
     </div>
 
